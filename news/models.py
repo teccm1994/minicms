@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
+from DjangoUeditor.models import UEditorField
 
 
 class Column(models.Model):
@@ -25,7 +25,7 @@ class Article(models.Model):
     slug = models.CharField('网址', max_length=256, db_index=True)
 
     author = models.ForeignKey(User, blank=True, null=True, verbose_name='作者', on_delete=models.CASCADE)
-    content = models.TextField('内容', default='', blank=True)
+    content = UEditorField('内容', height=300, width=1000, default=u'', blank=True, imagePath="uploads/images/", toolbars='besttome', filePath='uploads/files/')
 
     published = models.BooleanField('正式发布', default=True)
     pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
